@@ -2,14 +2,13 @@
 	--primaryColor: #ff515f;
 	--textColor: #7d73b1;
 	--borderRadius: 5px;
+	--navBarHeight: 3em;
 }
-
-html,
-body {
+* {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Andika New Basic', sans-serif;
 }
 
 .container {
@@ -52,6 +51,7 @@ body {
 	color: white;
 	cursor: pointer;
 	font-weight: 600;
+	outline: none;
 }
 .buttons-container > button:first-child {
 	background-color: var(--primaryColor);
@@ -74,4 +74,35 @@ body {
 	flex: 1;
 	display: flex;
 	justify-content: flex-start;
+}
+
+.navbar-container {
+	display: flex;
+	flex-direction: row;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: var(--primaryColor);
+	justify-content: flex-end;
+	height: var(--navBarHeight);
+	z-index: 1;
+}
+.navbar-container > ul {
+	width: 20%;
+	display: flex;
+	justify-content: space-between;
+	margin-right: 7%;
+}
+
+.list > button {
+	background-color: var(--primaryColor);
+	border: none;
+	margin: 5px 0;
+	color: white;
+	font-size: large;
+}
+
+.home {
+	padding-top: 3em;
 }

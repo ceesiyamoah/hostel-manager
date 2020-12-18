@@ -1,5 +1,5 @@
 import React from 'react';
-import SignupSVG from './../svg/SignupSVG';
+import loginSVG from './../svg/loginSVG.svg';
 
 const Login = () => {
 	return (
@@ -18,13 +18,13 @@ const Login = () => {
 						placeholder='Password'
 					/>
 					<div className='buttons-container'>
+						<button>Login</button>
 						<button>Sign up</button>
-						<button>Log in</button>
 					</div>
 				</form>
 			</div>
 			<div className='right-div'>
-				<SignupSVG fill='#ff515f' width='400' height='400' />
+				<img src={loginSVG} alt='test' height='400' width='400' />
 			</div>
 		</div>
 	);
