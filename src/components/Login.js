@@ -3,9 +3,9 @@ import loginSVG from './../svg/loginSVG.svg';
 
 const Login = () => {
 	return (
-		<div className='container'>
+		<div className='auth-container'>
 			<div className='left-div'>
-				<h1>Welcome</h1>
+				<h1>Welcome Back</h1>
 				<form>
 					<label htmlFor='email'>Email:</label>
 					<input type='email' id='email' required placeholder='Email' />

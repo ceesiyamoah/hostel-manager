@@ -2,7 +2,7 @@ import React from 'react';
 import SignupSVG from '../svg/SignupSVG';
 const Signup = () => {
 	return (
-		<div className='container'>
+		<div className='auth-container'>
 			<div className='left-div'>
 				<h1>Get Started</h1>
 				<form>
@@ -26,7 +26,7 @@ const Signup = () => {
 				</form>
 			</div>
 			<div className='right-div'>
-				<SignupSVG fill='#ff515f' width='400' height='400' />
+				<SignupSVG fill='#5A33FF' width='400' height='400' />
 			</div>
 		</div>
 	);

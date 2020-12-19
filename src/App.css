@@ -1,5 +1,5 @@
 :root {
-	--primaryColor: #ff515f;
+	--primaryColor: #5a33ff;
 	--textColor: #7d73b1;
 	--borderRadius: 5px;
 	--navBarHeight: 3em;
@@ -11,10 +11,9 @@
 	font-family: 'Andika New Basic', sans-serif;
 }
 
-.container {
+.auth-container {
 	display: flex;
-	margin: 0 15%;
-	padding: 15px;
+	margin: 10%;
 }
 .left-div {
 	width: 20%;
@@ -83,26 +82,60 @@
 	top: 0;
 	bottom: 0;
 	width: 100%;
-	background-color: var(--primaryColor);
+	background-color: #5833ff;
+
 	justify-content: flex-end;
 	height: var(--navBarHeight);
 	z-index: 1;
 }
-.navbar-container > ul {
+.navbar-container > .list {
 	width: 20%;
 	display: flex;
 	justify-content: space-between;
 	margin-right: 7%;
 }
 
-.list > button {
-	background-color: var(--primaryColor);
+.list > button,
+.signup,
+.login {
+	background-color: transparent;
 	border: none;
-	margin: 5px 0;
 	color: white;
-	font-size: large;
+	font-size: small;
+	outline: none;
+	cursor: pointer;
+	height: 100%;
 }
 
 .home {
-	padding-top: 3em;
+	padding-top: 10em;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding-left: 30px;
+	background-image: url(/src/svg/background.svg);
+	background-size: cover;
+	height: 100vh;
+}
+
+.home > .left-div {
+	width: 35%;
+}
+
+.home .button-container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.home .button-container > button {
+	border-radius: 20px;
+	font-size: small;
+	padding: 10px;
+	border: none;
+	background-color: var(--primaryColor);
+	width: 9em;
+	outline: none;
+	color: white;
+	margin: 50px;
+	cursor: pointer;
 }
