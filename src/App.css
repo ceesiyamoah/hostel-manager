@@ -107,7 +107,7 @@
 	height: 100%;
 }
 
-.home {
+.landing {
 	padding-top: 10em;
 	display: flex;
 	flex-direction: column;
@@ -118,16 +118,16 @@
 	height: 100vh;
 }
 
-.home > .left-div {
+.landing > .left-div {
 	width: 35%;
 }
 
-.home .button-container {
+.landing .button-container {
 	display: flex;
 	justify-content: space-around;
 }
 
-.home .button-container > button {
+.landing .button-container > button {
 	border-radius: 20px;
 	font-size: small;
 	padding: 10px;

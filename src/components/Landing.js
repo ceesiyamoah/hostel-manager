@@ -1,7 +1,7 @@
 import React from 'react';
-const Home = () => {
+const Landing = () => {
 	return (
-		<div className='home'>
+		<div className='landing'>
 			<div className='left-div'>
 				<h3>Market Place for hostels</h3>
 				<h1 class='big-title'>Connecting students to their next hostels</h1>
@@ -14,4 +14,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default Landing;
