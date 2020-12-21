@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import SignupSVG from '../svg/SignupSVG';
 import { connect } from 'react-redux';
-import { signup } from '../actions';
-const Signup = ({ signup }) => {
+import { signup } from '../actions/authActions';
+const Signup = ({ signup, errorMessage }) => {
 	const [signupDetails, setSignupDetails] = useState({
 		name: '',
 		email: '',
@@ -53,6 +53,9 @@ const Signup = ({ signup }) => {
 							setSignupDetails({ ...signupDetails, password: e.target.value })
 						}
 					/>
+					{errorMessage && (
+						<span className='error-message'>{errorMessage}</span>
+					)}
 					<div className='buttons-container'>
 						<button type='submit'>Sign up</button>
 						<button>Log in</button>
@@ -66,4 +69,8 @@ const Signup = ({ signup }) => {
 	);
 };
 
-export default connect(null, { signup })(Signup);
+const mapStateToProps = (state) => ({
+	errorMessage: state.auth.errorMessage,
+});
+
+export default connect(mapStateToProps, { signup })(Signup);

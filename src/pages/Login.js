@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import loginSVG from './../svg/loginSVG.svg';
-import { login } from './../actions/index';
+import { login } from '../actions/authActions';
 
-const Login = ({ login }) => {
+const Login = ({ login, errorMessage }) => {
 	const [loginDetails, setLoginDetails] = useState({ email: '', password: '' });
 	const onSubmit = (e) => {
 		e.preventDefault();
-
-		console.log(loginDetails);
 		login(loginDetails);
 	};
 	return (
@@ -39,6 +37,9 @@ const Login = ({ login }) => {
 							setLoginDetails({ ...loginDetails, password: e.target.value })
 						}
 					/>
+					{errorMessage && (
+						<span className='error-message'>{errorMessage}</span>
+					)}
 					<div className='buttons-container'>
 						<button type='submit'>Login</button>
 						<button>Sign up</button>
@@ -52,4 +53,12 @@ const Login = ({ login }) => {
 	);
 };
 
-export default connect(null, { login })(Login);
+const mapStateToProps = (state) => ({
+	errorMessage: state.auth.errorMessage,
+});
+
+const mapDispatchToProps = {
+	login,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

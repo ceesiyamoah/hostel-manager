@@ -1,16 +1,16 @@
 const authReducer = (
-	state = { email: '', password: '', name: '' },
+	state = { errorMessage: '', userId: '' },
 	{ type, payload }
 ) => {
 	switch (type) {
-		case 'LOGIN':
-			return { email: payload.email, password: payload.password, name: '' };
+		case 'AUTH_ERROR':
+			return { ...state, errorMessage: payload };
 		case 'SIGNUP':
-			return {
-				email: payload.email,
-				password: payload.password,
-				name: payload.name,
-			};
+			return { ...state, userId: payload, errorMessage: '' };
+		case 'LOGIN':
+			return { ...state, userId: payload, errorMessage: '' };
+		case 'CLEAR_ERROR':
+			return { ...state, errorMessage: '' };
 		default:
 			return state;
 	}
