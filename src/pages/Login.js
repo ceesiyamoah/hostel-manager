@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import loginSVG from './../svg/loginSVG.svg';
 import { login } from '../actions/authActions';
+import history from '../history';
 
-const Login = ({ login, errorMessage }) => {
+const Login = ({ login, errorMessage, uid }) => {
 	const [loginDetails, setLoginDetails] = useState({ email: '', password: '' });
 	const onSubmit = (e) => {
 		e.preventDefault();
 		login(loginDetails);
 	};
+
+	useEffect(() => {
+		if (uid) {
+			history.push('/dashboard');
+		}
+	}, [uid]);
+
 	return (
 		<div className='auth-container'>
 			<div className='left-div'>
@@ -37,9 +45,9 @@ const Login = ({ login, errorMessage }) => {
 							setLoginDetails({ ...loginDetails, password: e.target.value })
 						}
 					/>
-					{errorMessage && (
+					{/* {errorMessage && (
 						<span className='error-message'>{errorMessage}</span>
-					)}
+					)} */}
 					<div className='buttons-container'>
 						<button type='submit'>Login</button>
 						<button>Sign up</button>
@@ -55,6 +63,7 @@ const Login = ({ login, errorMessage }) => {
 
 const mapStateToProps = (state) => ({
 	errorMessage: state.auth.errorMessage,
+	uid: state.firebase.auth.uid,
 });
 
 const mapDispatchToProps = {

@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SignupSVG from '../svg/SignupSVG';
 import { connect } from 'react-redux';
-import { signup } from '../actions/authActions';
-const Signup = ({ signup, errorMessage }) => {
+import history from '../history';
+// import { signup } from '../actions/authActions';
+//! Add error message
+const Signup = ({ signup, errorMessage, uid }) => {
 	const [signupDetails, setSignupDetails] = useState({
 		name: '',
 		email: '',
@@ -11,8 +13,12 @@ const Signup = ({ signup, errorMessage }) => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		signup(signupDetails);
+		//signup(signupDetails);
 	};
+
+	useEffect(() => {
+		if (uid) history.push('/dashboard');
+	}, [uid]);
 	return (
 		<div className='auth-container'>
 			<div className='left-div'>
@@ -53,9 +59,9 @@ const Signup = ({ signup, errorMessage }) => {
 							setSignupDetails({ ...signupDetails, password: e.target.value })
 						}
 					/>
-					{errorMessage && (
+					{/* {errorMessage && (
 						<span className='error-message'>{errorMessage}</span>
-					)}
+					)} */}
 					<div className='buttons-container'>
 						<button type='submit'>Sign up</button>
 						<button>Log in</button>
@@ -71,6 +77,7 @@ const Signup = ({ signup, errorMessage }) => {
 
 const mapStateToProps = (state) => ({
 	errorMessage: state.auth.errorMessage,
+	uid: state.firebase.auth.uid,
 });
 
-export default connect(mapStateToProps, { signup })(Signup);
+export default connect(mapStateToProps, {})(Signup);

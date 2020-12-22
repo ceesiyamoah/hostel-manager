@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-
+import 'firebase/firestore';
 const config = {
 	apiKey: 'AIzaSyCo6C_UejwvmOj_8DUcxpvRHA254QX8dpQ',
 	authDomain: 'hostelmananger.firebaseapp.com',
@@ -12,5 +12,7 @@ const config = {
 	measurementId: 'G-JBX2036ME2',
 };
 
-const app = firebase.initializeApp(config);
-export default app;
+firebase.initializeApp(config);
+firebase.firestore();
+
+export default firebase;

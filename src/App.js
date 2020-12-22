@@ -9,7 +9,6 @@ import PublicRoute from './components/PublicRoute';
 import PrivateRoute from './components/PrivateRoute';
 import Dashboard from './pages/Dashboard';
 import history from './history';
-
 const App = () => {
 	return (
 		<>

@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect, Route } from 'react-router';
-import app from './../firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
+//TODO fix private route, does not work with auth state
 
 const PrivateRoute = ({ component: Component, restricted, ...rest }) => {
+	useEffect(() => {}, []);
+
 	return (
 		<Route
 			render={(props) =>
-				//TODO change 2>3 to the function that checks that a user is logged in
-				app.auth().onAuthStateChanged((user) => user) ? (
-					<Component {...props} />
-				) : (
-					<Redirect to='/' />
-				)
+				true ? <Component {...props} /> : <Redirect to='/' />
 			}
 		/>
 	);

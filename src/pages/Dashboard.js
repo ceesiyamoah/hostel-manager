@@ -6,6 +6,7 @@ const Dashboard = () => {
 			<SideBar />
 			<div className='dashboard-container'>
 				<h1>Welcome you're logged in</h1>
+				<h2>gdsa </h2>
 			</div>
 		</>
 	);

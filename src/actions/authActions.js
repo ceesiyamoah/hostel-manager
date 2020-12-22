@@ -1,44 +1,83 @@
-import app from '../firebase';
-import 'firebase/firestore';
 import history from '../history';
-import firebase from 'firebase/app';
 
-export const login = ({ email, password }) => async (dispatch) => {
-	try {
-		const {
-			user: { uid },
-		} = await app.auth().signInWithEmailAndPassword(email, password);
-		dispatch({ type: 'LOGIN', payload: uid });
-		history.push('/dashboard');
-	} catch (error) {
-		dispatch({ type: 'AUTH_ERROR', payload: error.message });
-		setTimeout(() => {
-			dispatch({ type: 'CLEAR_ERROR' });
-		}, 5000);
-	}
-};
-
-export const signup = ({ email, password, name }) => async (dispatch) => {
-	try {
-		const {
-			user: { uid },
-		} = await app.auth().createUserWithEmailAndPassword(email, password);
-		dispatch({ type: 'SIGNUP', payload: uid });
-
-		const db = firebase.firestore();
-		db.settings({
-			timestampsInSnapshot: true,
-		});
-		db.collection('managers').doc(uid).set({
-			name,
-			email,
+export const login = ({ email, password }) => (
+	dispatch,
+	getState,
+	{ getFirebase }
+) =>
+	getFirebase()
+		.auth()
+		.signInWithEmailAndPassword(email, password)
+		.then(() => {
+			dispatch({ type: 'LOGIN' });
+			history.push('/dashboard');
+		})
+		.catch((error) => {
+			dispatch({ type: 'AUTH_ERROR', payload: error.message });
 		});
 
-		history.push('/dashboard');
-	} catch (error) {
-		dispatch({ type: 'AUTH_ERROR', payload: error.message });
-		setTimeout(() => {
-			dispatch({ type: 'CLEAR_ERROR' });
-		}, 5000);
-	}
-};
+export const signout = () => (dispatch, getState, { getFirebase }) =>
+	getFirebase()
+		.auth()
+		.signOut()
+		.then(() => {
+			dispatch({ type: 'SIGN_OUT' });
+		});
+
+// try {
+// 	const { user } = await app
+// 		.auth()
+// .signInWithEmailAndPassword(email, password);
+// 	console.log(user);
+// dispatch({ type: 'LOGIN', payload: user });
+
+// 	history.push('/dashboard');
+// } catch (error) {
+// dispatch({ type: 'AUTH_ERROR', payload: error.message });
+// 	setTimeout(() => {
+// 		dispatch({ type: 'CLEAR_ERROR' });
+// 	}, 5000);
+// });
+
+// export const setCurrentUser = (user) => (dispatch) => {
+// 	dispatch({ type: 'LOGIN', payload: user });
+// };
+
+// export const signup = ({ email, password, name }) => async (dispatch) => {
+// 	try {
+// 		const { user } = await app
+// 			.auth()
+// 			.createUserWithEmailAndPassword(email, password);
+// 		dispatch({ type: 'SIGNUP', payload: user });
+
+// 		const db = firebase.firestore();
+// 		db.settings({
+// 			timestampsInSnapshot: true,
+// 		});
+// 		db.collection('managers').doc(user.uid).set({
+// 			name,
+// 			email,
+// 		});
+
+// 		history.push('/dashboard');
+// 	} catch (error) {
+// 		dispatch({ type: 'AUTH_ERROR', payload: error.message });
+// 		setTimeout(() => {
+// 			dispatch({ type: 'CLEAR_ERROR' });
+// 		}, 5000);
+// 	}
+// };
+
+// export const signout = () => (dispatch) => {
+// 	firebase
+// 		.auth()
+// 		.signOut()
+// 		.then(() => {
+// 			dispatch({ type: 'SIGN_OUT' });
+// 			history.push('/');
+// 		})
+// 		.catch((error) => {
+// 			console.log('not done');
+// 			dispatch({ type: 'SIGN_OUT_ERROR', payload: error });
+// 		});
+// };
