@@ -16,13 +16,15 @@ export const login = ({ email, password }) => (
 			dispatch({ type: 'AUTH_ERROR', payload: error.message });
 		});
 
-export const signout = () => (dispatch, getState, { getFirebase }) =>
+export const signout = () => (dispatch, getState, { getFirebase }) => {
 	getFirebase()
 		.auth()
 		.signOut()
 		.then(() => {
 			dispatch({ type: 'SIGN_OUT' });
+			history.push('/');
 		});
+};
 
 // try {
 // 	const { user } = await app

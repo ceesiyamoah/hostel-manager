@@ -2,10 +2,9 @@ import React from 'react';
 import './App.css';
 import NavBar from './components/NavBar';
 import Landing from './pages/Landing';
-import { Router, Switch } from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import PublicRoute from './components/PublicRoute';
 import PrivateRoute from './components/PrivateRoute';
 import Dashboard from './pages/Dashboard';
 import history from './history';
@@ -15,19 +14,9 @@ const App = () => {
 			<Router history={history}>
 				{/* <NavBar /> */}
 				<Switch>
-					<PublicRoute
-						component={Login}
-						restricted={false}
-						exact
-						path='/login'
-					/>
-					<PublicRoute
-						component={Signup}
-						restricted={false}
-						exact
-						path='/signup'
-					/>
-					<PublicRoute component={Landing} restricted={false} exact path='/' />
+					<Route component={Login} exact path='/login' />
+					<Route component={Signup} exact path='/signup' />
+					<Route component={Landing} restricted={false} exact path='/' />
 					<PrivateRoute
 						component={Dashboard}
 						restricted={true}

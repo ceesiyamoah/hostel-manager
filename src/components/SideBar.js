@@ -9,11 +9,11 @@ import { signout } from './../actions/authActions';
 const SideBar = ({ signout }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const toggleSideBar = () => setIsExpanded(!isExpanded);
+
 	return (
 		<>
 			<div className='navbar'>
 				<FaBars onClick={toggleSideBar} color='white' className='menu-bars' />
-
 				<button className='signout' onClick={signout}>
 					Sign out
 				</button>
@@ -41,4 +41,8 @@ const SideBar = ({ signout }) => {
 	);
 };
 
-export default connect(null, { signout })(SideBar);
+const mapDispatchToProps = {
+	signout,
+};
+
+export default connect(null, mapDispatchToProps)(SideBar);

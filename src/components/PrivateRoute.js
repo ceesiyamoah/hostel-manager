@@ -1,20 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Redirect, Route } from 'react-router';
-import firebase from 'firebase/app';
 import 'firebase/auth';
+import { connect } from 'react-redux';
 
-//TODO fix private route, does not work with auth state
-
-const PrivateRoute = ({ component: Component, restricted, ...rest }) => {
-	useEffect(() => {}, []);
+const PrivateRoute = ({
+	component: Component,
+	restricted,
+	authExists,
+	...rest
+}) => {
+	console.log(authExists);
 
 	return (
 		<Route
 			render={(props) =>
-				true ? <Component {...props} /> : <Redirect to='/' />
+				authExists ? <Component {...props} /> : <Redirect to='/' />
 			}
 		/>
 	);
 };
 
-export default PrivateRoute;
+export default connect(({ firebase: { auth } }) => ({
+	authExists: !!auth && !!auth.uid,
+}))(PrivateRoute);

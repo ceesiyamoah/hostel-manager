@@ -1,5 +1,10 @@
-import React from 'react';
-const Landing = () => {
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import history from '../history';
+const Landing = ({ uid }) => {
+	useEffect(() => {
+		if (uid) history.push('/dashboard');
+	});
 	return (
 		<div className='landing'>
 			<div className='left-div'>
@@ -14,4 +19,8 @@ const Landing = () => {
 	);
 };
 
-export default Landing;
+const mapStateToProps = (state) => ({
+	uid: state.firebase.auth.uid,
+});
+
+export default connect(mapStateToProps, null)(Landing);
