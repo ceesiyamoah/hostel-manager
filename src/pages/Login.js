@@ -45,9 +45,9 @@ const Login = ({ login, errorMessage, uid }) => {
 							setLoginDetails({ ...loginDetails, password: e.target.value })
 						}
 					/>
-					{/* {errorMessage && (
+					{errorMessage && (
 						<span className='error-message'>{errorMessage}</span>
-					)} */}
+					)}
 					<div className='buttons-container'>
 						<button type='submit'>Login</button>
 						<button>Sign up</button>

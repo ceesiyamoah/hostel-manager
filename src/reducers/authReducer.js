@@ -1,4 +1,7 @@
-const authReducer = (state = { errorMessage: null }, { type, payload }) => {
+const authReducer = (
+	state = { errorMessage: null, verificationError: null },
+	{ type, payload }
+) => {
 	switch (type) {
 		case 'AUTH_ERROR':
 			return { ...state, errorMessage: payload };
@@ -10,6 +13,10 @@ const authReducer = (state = { errorMessage: null }, { type, payload }) => {
 			return { ...state, errorMessage: '' };
 		case 'SIGN_OUT':
 			return state;
+		case 'VERIFY_EMAIL':
+			return state;
+		case 'VERIFY_EMAIL_ERROR':
+			return { ...state, verificationError: payload };
 		default:
 			return state;
 	}

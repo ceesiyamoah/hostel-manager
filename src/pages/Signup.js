@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import SignupSVG from '../svg/SignupSVG';
 import { connect } from 'react-redux';
 import history from '../history';
-// import { signup } from '../actions/authActions';
-//! Add error message
+import { signup } from '../actions/authActions';
+
 const Signup = ({ signup, errorMessage, uid }) => {
 	const [signupDetails, setSignupDetails] = useState({
 		name: '',
@@ -13,7 +13,7 @@ const Signup = ({ signup, errorMessage, uid }) => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		//signup(signupDetails);
+		signup(signupDetails);
 	};
 
 	useEffect(() => {
@@ -59,9 +59,9 @@ const Signup = ({ signup, errorMessage, uid }) => {
 							setSignupDetails({ ...signupDetails, password: e.target.value })
 						}
 					/>
-					{/* {errorMessage && (
+					{errorMessage && (
 						<span className='error-message'>{errorMessage}</span>
-					)} */}
+					)}
 					<div className='buttons-container'>
 						<button type='submit'>Sign up</button>
 						<button>Log in</button>
@@ -80,4 +80,4 @@ const mapStateToProps = (state) => ({
 	uid: state.firebase.auth.uid,
 });
 
-export default connect(mapStateToProps, {})(Signup);
+export default connect(mapStateToProps, { signup })(Signup);

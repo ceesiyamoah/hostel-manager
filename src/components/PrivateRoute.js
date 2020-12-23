@@ -9,8 +9,6 @@ const PrivateRoute = ({
 	authExists,
 	...rest
 }) => {
-	console.log(authExists);
-
 	return (
 		<Route
 			render={(props) =>

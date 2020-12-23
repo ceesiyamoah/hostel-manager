@@ -3,7 +3,7 @@ import { FaBullhorn } from 'react-icons/fa';
 import { BiBuildings } from 'react-icons/bi';
 import { BsFillPeopleFill } from 'react-icons/bs';
 
-export const SidebarData = [
+export const NavBarData = [
 	{
 		title: 'Add hostel',
 		path: '/hostels',

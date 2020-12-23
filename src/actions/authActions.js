@@ -14,6 +14,9 @@ export const login = ({ email, password }) => (
 		})
 		.catch((error) => {
 			dispatch({ type: 'AUTH_ERROR', payload: error.message });
+			setTimeout(() => {
+				dispatch({ type: 'CLEAR_ERROR' });
+			}, 5000);
 		});
 
 export const signout = () => (dispatch, getState, { getFirebase }) => {
@@ -26,6 +29,45 @@ export const signout = () => (dispatch, getState, { getFirebase }) => {
 		});
 };
 
+export const signup = ({ email, password, name }) => (
+	dispatch,
+	getState,
+	{ getFirebase }
+) => {
+	console.log(getFirebase());
+	return getFirebase()
+		.auth()
+		.createUserWithEmailAndPassword(email, password)
+		.then(() => {
+			dispatch({ type: 'SIGN_UP' });
+			history.push('/dashboard');
+		})
+		.catch((error) => {
+			dispatch({ type: 'AUTH_ERROR', payload: error.message });
+			setTimeout(() => {
+				dispatch({ type: 'CLEAR_ERROR' });
+			}, 5000);
+		});
+};
+
+export const sendVerificationEmail = () => (
+	dispatch,
+	getState,
+	{ getFirebase }
+) => {
+	const user = getFirebase().auth().currentUser;
+	console.log(user);
+
+	user
+		.sendEmailVerification()
+		.then(() => {
+			dispatch({ type: 'VERIFY_EMAIL' });
+		})
+		.catch((error) =>
+			dispatch({ type: 'VERIFY_EMAIL_ERROR', payload: error.message })
+		);
+};
+
 // try {
 // 	const { user } = await app
 // 		.auth()
@@ -36,9 +78,9 @@ export const signout = () => (dispatch, getState, { getFirebase }) => {
 // 	history.push('/dashboard');
 // } catch (error) {
 // dispatch({ type: 'AUTH_ERROR', payload: error.message });
-// 	setTimeout(() => {
-// 		dispatch({ type: 'CLEAR_ERROR' });
-// 	}, 5000);
+// setTimeout(() => {
+// 	dispatch({ type: 'CLEAR_ERROR' });
+// }, 5000);
 // });
 
 // export const setCurrentUser = (user) => (dispatch) => {

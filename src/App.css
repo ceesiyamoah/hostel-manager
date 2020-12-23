@@ -88,6 +88,14 @@
 	height: var(--navBarHeight);
 	z-index: 1;
 }
+
+.navbar {
+	background-color: var(--primaryColor);
+	height: var(--navBarHeight);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
 .navbar-container > .list {
 	width: 20%;
 	display: flex;
@@ -157,13 +165,6 @@
 }
 
 /* try */
-.navbar {
-	background-color: var(--primaryColor);
-	height: var(--navBarHeight);
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
 
 .menu-bars {
 	margin-left: 2rem;
@@ -225,4 +226,40 @@
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
+}
+
+.list.unverified {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+.list.unverified > .signout {
+	background-color: transparent;
+	border: 2px solid white;
+	color: white;
+	font-size: small;
+	outline: none;
+	cursor: pointer;
+	height: 2em;
+	margin: 0;
+}
+
+.container.verify {
+	margin: var(--navBarHeight) 10% 0 10%;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.container.verify > button {
+	background-color: var(--primaryColor);
+	border: transparent;
+	padding: 10px;
+	margin: 10px;
+	color: white;
+	cursor: pointer;
 }

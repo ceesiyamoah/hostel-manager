@@ -8,20 +8,27 @@ import Signup from './pages/Signup';
 import PrivateRoute from './components/PrivateRoute';
 import Dashboard from './pages/Dashboard';
 import history from './history';
+import VerifyEmail from './pages/VerifyEmail';
 const App = () => {
 	return (
 		<>
 			<Router history={history}>
-				{/* <NavBar /> */}
+				<NavBar />
 				<Switch>
 					<Route component={Login} exact path='/login' />
 					<Route component={Signup} exact path='/signup' />
 					<Route component={Landing} restricted={false} exact path='/' />
 					<PrivateRoute
 						component={Dashboard}
-						restricted={true}
+						restricted
 						exact
 						path='/dashboard'
+					/>
+					<PrivateRoute
+						component={VerifyEmail}
+						restricted
+						exact
+						path='/verify'
 					/>
 				</Switch>
 			</Router>
