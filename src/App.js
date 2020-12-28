@@ -9,6 +9,7 @@ import PrivateRoute from './components/PrivateRoute';
 import Dashboard from './pages/Dashboard';
 import history from './history';
 import VerifyEmail from './pages/VerifyEmail';
+import ResetPassword from './components/ResetPassword';
 const App = () => {
 	return (
 		<>
@@ -17,7 +18,8 @@ const App = () => {
 				<Switch>
 					<Route component={Login} exact path='/login' />
 					<Route component={Signup} exact path='/signup' />
-					<Route component={Landing} restricted={false} exact path='/' />
+					<Route component={Landing} exact path='/' />
+					<Route component={ResetPassword} exact path='/resetpassword' />
 					<PrivateRoute
 						component={Dashboard}
 						restricted

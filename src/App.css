@@ -44,19 +44,28 @@
 	display: flex;
 	justify-content: center;
 }
-.buttons-container > button {
-	padding: 10px 20px;
+.buttons-container button {
 	border-radius: var(--borderRadius);
-	color: white;
 	cursor: pointer;
 	font-weight: 600;
 	outline: none;
-}
-.buttons-container > button:first-child {
-	background-color: var(--primaryColor);
-	border: none;
-	flex: 1;
+
 	margin: 5px 0;
+	padding: 10px 20px;
+	border: none;
+}
+
+.buttons-container .resetpassword {
+	background-color: white;
+}
+.buttons-container .resetpassword:hover {
+	color: var(--primaryColor);
+}
+
+.buttons-container > button:first-child {
+	color: white;
+	background-color: var(--primaryColor);
+	flex: 1;
 }
 .buttons-container > button:first-child:hover {
 	box-shadow: 1px 1px 1px grey;
@@ -161,7 +170,46 @@
 }
 
 .dashboard-container {
-	margin: var(--navBarHeight) 0 0 var(--navBarHeight);
+	margin: var(--navBarHeight);
+}
+
+.dashboard-container.resetpassword {
+	display: flex;
+}
+
+.dashboard-container.resetpassword > .content {
+	width: 50%;
+	display: flex;
+	padding-left: 50px;
+	align-items: flex-start;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.dashboard-container.resetpassword > .content > button {
+	border-radius: var(--borderRadius);
+	color: white;
+	cursor: pointer;
+	font-weight: 600;
+	outline: none;
+	background-color: var(--primaryColor);
+	margin: 5px 0;
+	padding: 10px 20px;
+	border: none;
+}
+
+.dashboard-container.resetpassword > .content > input {
+	border: none;
+	outline: none;
+	border-bottom: 1px solid black;
+	font-size: large;
+	margin: 10px 0;
+}
+
+.dashboard-container.resetpassword > .image-container {
+	display: flex;
+	justify-content: flex-end;
+	width: 50%;
 }
 
 /* try */

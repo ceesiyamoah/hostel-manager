@@ -1,0 +1,9 @@
+export const AUTH_ERROR = 'AUTH_ERROR';
+export const SIGNUP = 'SIGNUP';
+export const LOGIN = 'LOGIN';
+export const CLEAR_ERROR = 'CLEAR_ERROR';
+export const SIGN_OUT = 'SIGN_OUT';
+export const VERIFY_EMAIL = 'VERIFY_EMAIL';
+export const VERIFY_EMAIL_ERROR = 'VERIFY_EMAIL_ERROR';
+export const SEND_RESET_PASSWORD = 'SEND_RESET_PASSWORD';
+export const SEND_RESET_PASSWORD_ERROR = 'AUTH_ERROR';

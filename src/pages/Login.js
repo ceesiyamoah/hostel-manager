@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import loginSVG from './../svg/loginSVG.svg';
 import { login } from '../actions/authActions';
 import history from '../history';
+import { Link } from 'react-router-dom';
 
 const Login = ({ login, errorMessage, uid }) => {
 	const [loginDetails, setLoginDetails] = useState({ email: '', password: '' });
@@ -50,7 +51,9 @@ const Login = ({ login, errorMessage, uid }) => {
 					)}
 					<div className='buttons-container'>
 						<button type='submit'>Login</button>
-						<button>Sign up</button>
+						<Link to='/resetpassword'>
+							<button className='resetpassword'>Forgot password</button>
+						</Link>
 					</div>
 				</form>
 			</div>
