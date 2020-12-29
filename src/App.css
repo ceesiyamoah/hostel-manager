@@ -198,6 +198,20 @@
 	border: none;
 }
 
+.dashboard-container.hostelform button {
+	border-radius: var(--borderRadius);
+	color: white;
+	cursor: pointer;
+	font-weight: 600;
+	outline: none;
+	background-color: var(--primaryColor);
+	margin: 5px 0;
+	padding: 10px 20px;
+	border: none;
+	width: 10%;
+	align-self: center;
+}
+
 .dashboard-container.resetpassword > .content > input {
 	border: none;
 	outline: none;
@@ -210,6 +224,27 @@
 	display: flex;
 	justify-content: flex-end;
 	width: 50%;
+}
+
+.dashboard-container.hostelform > form {
+	display: flex;
+	flex-direction: column;
+}
+.dashboard-container.hostelform > form label {
+	display: inline-block;
+	width: 20%;
+}
+.dashboard-container.hostelform > form input {
+	width: 50%;
+	border: none;
+	outline: none;
+	border-bottom: 2px solid black;
+	border: 1px solid grey;
+	padding: 10px;
+	font-size: 14px;
+	border-radius: var(--borderRadius);
+	background-color: #f6f7fa;
+	margin: 10px 0;
 }
 
 /* try */

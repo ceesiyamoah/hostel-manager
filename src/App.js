@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard';
 import history from './history';
 import VerifyEmail from './pages/VerifyEmail';
 import ResetPassword from './components/ResetPassword';
+import AddHostel from './components/AddHostel';
 const App = () => {
 	return (
 		<>
@@ -20,6 +21,12 @@ const App = () => {
 					<Route component={Signup} exact path='/signup' />
 					<Route component={Landing} exact path='/' />
 					<Route component={ResetPassword} exact path='/resetpassword' />
+					<PrivateRoute
+						component={AddHostel}
+						restricted
+						exact
+						path='/addhostel'
+					/>
 					<PrivateRoute
 						component={Dashboard}
 						restricted

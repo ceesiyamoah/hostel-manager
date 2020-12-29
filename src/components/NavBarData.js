@@ -6,7 +6,7 @@ import { BsFillPeopleFill } from 'react-icons/bs';
 export const NavBarData = [
 	{
 		title: 'Add hostel',
-		path: '/hostels',
+		path: '/addhostel',
 		icon: <BiBuildings />,
 		cName: 'nav-text',
 	},
