@@ -49,7 +49,14 @@ export const signup = ({ email, password, name }) => (
 	return getFirebase()
 		.auth()
 		.createUserWithEmailAndPassword(email, password)
-		.then(() => {
+		.then((userData) => {
+			userData.user
+				.updateProfile({
+					displayName: name,
+					photoURL: '',
+				})
+				.then()
+				.catch();
 			dispatch({ type: SIGNUP });
 			history.push('/dashboard');
 		})

@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
-const AddHostel = () => {
-	const [hostelDetails, setHostelDetails] = useState({
-		hostelName: '',
-		numOfBuildings: 0,
-		numOfFloors: 0,
-		numOfRoomsPerFloor: 0,
-	});
+import { connect } from 'react-redux';
+import { addHostel } from './../actions/managerHostelsActions';
+
+const initialState = {
+	hostelName: '',
+	numOfBuildings: 0,
+	numOfFloors: 0,
+	numOfRoomsPerFloor: 0,
+};
+const AddHostel = ({ addHostel }) => {
+	const [hostelDetails, setHostelDetails] = useState(initialState);
 	const [error, setError] = useState('');
 
 	const handleChange = (e) => {
 		if (e.target.type === 'number') {
-			setHostelDetails({
-				[e.target.id]: +e.target.value,
-			});
+			setHostelDetails({ ...hostelDetails, [e.target.id]: +e.target.value });
 		} else {
-			setHostelDetails({
-				[e.target.id]: e.target.value,
-			});
+			setHostelDetails({ ...hostelDetails, [e.target.id]: e.target.value });
 		}
 	};
 
@@ -30,6 +30,9 @@ const AddHostel = () => {
 		} = hostelDetails;
 		if (hostelName || numOfBuildings || numOfFloors || numOfRoomsPerFloor) {
 			//post to firebase
+			addHostel(hostelDetails);
+
+			setHostelDetails(initialState);
 		} else {
 			setError('Please fill in the appropriate details');
 			setTimeout(() => {
@@ -57,7 +60,7 @@ const AddHostel = () => {
 						type='number'
 						id='numOfBuildings'
 						onChange={handleChange}
-						value={hostelDetails.numOfBuildings}
+						value={+hostelDetails.numOfBuildings}
 						min={0}
 					/>
 				</div>
@@ -68,7 +71,7 @@ const AddHostel = () => {
 						id='numOfFloors'
 						min={0}
 						onChange={handleChange}
-						value={hostelDetails.numOfFloors}
+						value={+hostelDetails.numOfFloors}
 					/>
 				</div>
 				<div>
@@ -78,7 +81,7 @@ const AddHostel = () => {
 						id='numOfRoomsPerFloor'
 						min={0}
 						onChange={handleChange}
-						value={hostelDetails.numOfRoomsPerFloor}
+						value={+hostelDetails.numOfRoomsPerFloor}
 					/>
 				</div>
 				{error && <span style={{ color: 'red' }}>{error}</span>}
@@ -88,4 +91,8 @@ const AddHostel = () => {
 	);
 };
 
-export default AddHostel;
+const mapDispatchToProps = {
+	addHostel,
+};
+
+export default connect(null, mapDispatchToProps)(AddHostel);
