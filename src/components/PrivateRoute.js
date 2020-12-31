@@ -9,8 +9,10 @@ const PrivateRoute = ({
 	authExists,
 	...rest
 }) => {
+	console.log(rest);
 	return (
 		<Route
+			{...rest}
 			render={(props) =>
 				authExists ? <Component {...props} /> : <Redirect to='/' />
 			}
