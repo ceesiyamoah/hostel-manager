@@ -1,9 +1,15 @@
 import React from 'react';
-import { useParams } from 'react-router';
-const HostelDetails = (props) => {
-	const thing = useParams();
-	console.log(thing);
+import { connect } from 'react-redux';
+const HostelDetails = ({ match, hostel }) => {
+	console.log(match.params.id);
 	return <div className='dashboard-container'>fkdls</div>;
 };
 
-export default HostelDetails;
+const mapStateToProps = (state, ownProps) => {
+	console.log(state.firestore);
+	return {
+		hostel: state,
+	};
+};
+
+export default connect(mapStateToProps, null)(HostelDetails);

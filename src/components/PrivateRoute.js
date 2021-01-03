@@ -9,7 +9,6 @@ const PrivateRoute = ({
 	authExists,
 	...rest
 }) => {
-	console.log(rest);
 	return (
 		<Route
 			{...rest}

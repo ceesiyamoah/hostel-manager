@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-const config = {
+const configDetails = {
 	apiKey: 'AIzaSyCo6C_UejwvmOj_8DUcxpvRHA254QX8dpQ',
 	authDomain: 'hostelmananger.firebaseapp.com',
 	databaseURL: 'https://hostelmananger.firebaseio.com',
@@ -12,7 +12,7 @@ const config = {
 	measurementId: 'G-JBX2036ME2',
 };
 
-firebase.initializeApp(config);
+firebase.initializeApp(configDetails);
 firebase.firestore();
 
 export default firebase;
