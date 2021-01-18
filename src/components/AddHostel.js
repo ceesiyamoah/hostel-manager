@@ -1,88 +1,33 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { ammenties, hostelInitialState } from '../constants';
+import Input from '../Input';
 import { addHostel } from './../actions/managerHostelsActions';
+import Radio from './Radio';
+import { hostelFormDetails } from './../constants/index';
 
-const initialState = {
-	hostelName: '',
-	numOfBuildings: 0,
-	numOfFloors: 0,
-	numOfRoomsPerFloor: 0,
-};
 const AddHostel = ({ addHostel }) => {
-	const [hostelDetails, setHostelDetails] = useState(initialState);
-	const [error, setError] = useState('');
-
-	const handleChange = (e) => {
-		if (e.target.type === 'number') {
-			setHostelDetails({ ...hostelDetails, [e.target.id]: +e.target.value });
-		} else {
-			setHostelDetails({ ...hostelDetails, [e.target.id]: e.target.value });
-		}
-	};
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		const {
-			hostelName,
-			numOfBuildings,
-			numOfFloors,
-			numOfRoomsPerFloor,
-		} = hostelDetails;
-		if (hostelName || numOfBuildings || numOfFloors || numOfRoomsPerFloor) {
-			//post to firebase
-			addHostel(hostelDetails);
-
-			setHostelDetails(initialState);
-		} else {
-			setError('Please fill in the appropriate details');
-			setTimeout(() => {
-				setError('');
-			}, 5000);
-		}
-	};
+	const [hostelDetails, setHostelDetails] = useState(hostelInitialState);
+	const [error, setError] = useState(false);
 
 	return (
 		<div className='dashboard-container hostelform'>
-			<form onSubmit={handleSubmit}>
-				<h1>Hostel Details</h1>
-				<div>
-					<label htmlFor='hostelName'>Hostel Name:</label>
-					<input
-						type='text'
-						id='hostelName'
-						onChange={handleChange}
-						value={hostelDetails.hostelName}
+			<form>
+				<h1 style={{ textAlign: 'center' }}>Hostel Details</h1>
+				{hostelFormDetails.map((item) => (
+					<Input
+						name={item.name || item}
+						type={item?.type}
+						multiple={item?.multiple}
+						accept={item?.accept}
 					/>
-				</div>
-				<div>
-					<label htmlFor='numOfBuildings'>Number of Buildings</label>
-					<input
-						type='number'
-						id='numOfBuildings'
-						onChange={handleChange}
-						value={+hostelDetails.numOfBuildings}
-						min={0}
-					/>
-				</div>
-				<div>
-					<label htmlFor='numOfFloors'>Number of floors</label>
-					<input
-						type='number'
-						id='numOfFloors'
-						min={0}
-						onChange={handleChange}
-						value={+hostelDetails.numOfFloors}
-					/>
-				</div>
-				<div>
-					<label htmlFor='numOfRoomsPerFloor'>Number of rooms per floor</label>
-					<input
-						type='number'
-						id='numOfRoomsPerFloor'
-						min={0}
-						onChange={handleChange}
-						value={+hostelDetails.numOfRoomsPerFloor}
-					/>
+				))}
+				<hr />
+				<h3 style={{ textAlign: 'center' }}>Ammenties</h3>
+				<div className='ammenties'>
+					{ammenties.map((item) => (
+						<Radio name={item} key={item} />
+					))}
 				</div>
 				{error && <span style={{ color: 'red' }}>{error}</span>}
 				<button type='submit'>Submit hostel</button>

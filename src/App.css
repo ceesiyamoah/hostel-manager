@@ -234,7 +234,13 @@
 	display: inline-block;
 	width: 20%;
 }
-.dashboard-container.hostelform > form input {
+
+.hostelform div {
+	display: flex;
+	align-items: center;
+}
+.dashboard-container.hostelform > form input,
+.dashboard-container.hostelform textarea {
 	width: 50%;
 	border: none;
 	outline: none;
@@ -345,4 +351,19 @@
 	margin: 10px;
 	color: white;
 	cursor: pointer;
+}
+
+.ammenties {
+	flex-flow: row wrap;
+	justify-content: space-between;
+}
+
+.ammenties > .option {
+	margin: 10px;
+	padding: 10px;
+	width: 45%;
+}
+.ammenties p {
+	display: inline-block;
+	width: 40%;
 }
