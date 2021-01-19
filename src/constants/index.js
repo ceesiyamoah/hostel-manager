@@ -1,12 +1,12 @@
 export const ammenties = [
-	'Generator',
-	'Library',
-	'Study Room',
-	'Wifi',
-	'Security',
-	'Parking Space',
-	'Recreational Space',
-	'TV Room',
+	{ name: 'Generator', id: 'generator' },
+	{ name: 'Library', id: 'library' },
+	{ name: 'Study Room', id: 'studyRoom' },
+	{ name: 'Wifi', id: 'wifi' },
+	{ name: 'Security', id: 'security' },
+	{ name: 'Parking Space', id: 'parkingSpace' },
+	{ name: 'Recreational Space', id: 'recreationalSpace' },
+	{ name: 'TV Room', id: 'tvRoom' },
 ];
 
 export const hostelInitialState = {
@@ -14,24 +14,23 @@ export const hostelInitialState = {
 	location: '',
 	description: '',
 	pictures: null,
-	ammenities: {
-		generator: false,
-		library: false,
-		studyRoom: false,
-		wifi: false,
-		security: false,
-		parkingSpace: false,
-		recreationalSpace: false,
-		tvRoom: false,
-	},
+	generator: false,
+	library: false,
+	studyRoom: false,
+	wifi: false,
+	security: false,
+	parkingSpace: false,
+	recreationalSpace: false,
+	tvRoom: false,
 };
 
 export const hostelFormDetails = [
-	'Hostel Name',
-	'Location',
-	{ name: 'Description', type: 'textarea' },
+	{ name: 'Hostel Name', id: 'hostelName' },
+	{ name: 'Location', id: 'location' },
+	{ name: 'Description', type: 'textarea', id: 'description' },
 	{
 		name: 'Picture(s)',
+		id: 'pictures',
 		type: 'file',
 		rest: "multiple accept='image/*'",
 		multiple: true,

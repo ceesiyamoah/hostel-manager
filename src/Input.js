@@ -1,16 +1,19 @@
 import React from 'react';
-const Input = ({ name, type, ...rest }) => {
-	const nameForClass = name.split(' ').join('').toLowerCase();
-
+const Input = ({ name, id, onChange, type, ...rest }) => {
 	return (
 		<div>
-			<label htmlFor={nameForClass}>{name}:</label>
-			<input
-				type={type || 'text'}
-				id={nameForClass}
-				placeholder={name}
-				{...rest}
-			/>
+			<label htmlFor={id}>{name}:</label>
+			{type === 'textarea' ? (
+				<textarea placeholder={name} id={id} {...rest} onChange={onChange} />
+			) : (
+				<input
+					type={type || 'text'}
+					placeholder={name}
+					id={id}
+					{...rest}
+					onChange={onChange}
+				/>
+			)}
 		</div>
 	);
 };

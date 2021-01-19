@@ -1,15 +1,28 @@
 import React from 'react';
-const Radio = ({ name }) => {
-	const nameForClass = name.split(' ').join('').toLowerCase();
+const Radio = ({ name, available, id, onChange }) => {
 	return (
 		<div className='option'>
 			<p>{name} Available?</p>
 			<>
-				<input type='radio' name={nameForClass} id={`${nameForClass}_yes`} />
-				<label htmlFor={`${nameForClass}_yes`}>Yes</label>
+				<input
+					type='radio'
+					name={id}
+					id={`${id}_yes`}
+					checked={available}
+					value={true}
+					onChange={onChange}
+				/>
+				<label htmlFor={`${id}_yes`}>Yes</label>
 			</>
 			<>
-				<input type='radio' name={nameForClass} id={`${nameForClass}_no`} />
+				<input
+					type='radio'
+					name={id}
+					id={`${id}_no`}
+					checked={!available}
+					value={false}
+					onChange={onChange}
+				/>
 				<label htmlFor={`${name.toLowerCase()}_yes`}>No</label>
 			</>
 		</div>

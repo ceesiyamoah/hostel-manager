@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/storage';
 const configDetails = {
 	apiKey: 'AIzaSyCo6C_UejwvmOj_8DUcxpvRHA254QX8dpQ',
 	authDomain: 'hostelmananger.firebaseapp.com',
@@ -14,5 +15,6 @@ const configDetails = {
 
 firebase.initializeApp(configDetails);
 firebase.firestore();
+firebase.storage();
 
 export default firebase;
