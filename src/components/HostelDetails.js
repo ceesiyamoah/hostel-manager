@@ -1,7 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-const HostelDetails = ({ match, hostel }) => {
-	console.log(match.params.id);
+const HostelDetails = ({
+	match: {
+		params: { id, manager },
+	},
+	hostel,
+	...rest
+}) => {
+	console.log(id, manager);
 	return <div className='dashboard-container'>fkdls</div>;
 };
 

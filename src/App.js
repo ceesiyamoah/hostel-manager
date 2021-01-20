@@ -44,7 +44,7 @@ const App = () => {
 						component={HostelDetails}
 						restricted
 						exact
-						path='/managerhostels/:id'
+						path='/managerhostels/:manager/:id'
 					/>
 				</Switch>
 			</Router>

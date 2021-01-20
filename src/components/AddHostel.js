@@ -21,12 +21,10 @@ const AddHostel = ({ addHostel }) => {
 				break;
 
 			case 'radio':
-				console.log(name, value);
 				setHostelDetails({
 					...hostelDetails,
 					[name]: value === 'true',
 				});
-				//console.log(e.target.name);
 				break;
 			default:
 				setHostelDetails({ ...hostelDetails, [id]: value });

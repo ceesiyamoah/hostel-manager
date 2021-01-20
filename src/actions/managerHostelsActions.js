@@ -4,19 +4,17 @@ import { ADD_HOSTEL, ADD_HOSTEL_ERROR } from '../types';
 export const addHostel = ({ pictures, hostelName, ...hostelDetails }) => async (
 	dispatch,
 	getState,
-	{ getFirebase, getFirestore }
+	{ getFirebase }
 ) => {
-	const auth = getState().firebase.auth.uid;
-
-	const storageRef = getFirebase().storage().ref();
-
 	const uploadedFiles = await Promise.all(
 		pictures.map(async (file, index) => {
-			const uploadTask = storageRef
+			const uploadTask = getFirebase()
+				.storage()
+				.ref()
 				.child(
-					`images/${auth}/${hostelName}/${hostelName + index}.${
-						file.name.split('.')[1]
-					}`
+					`images/${getState().firebase.auth.uid}/${hostelName}/${
+						hostelName + index
+					}.${file.name.split('.')[1]}`
 				)
 				.put(file);
 			const url = await new Promise((resolve, reject) => {
@@ -40,9 +38,10 @@ export const addHostel = ({ pictures, hostelName, ...hostelDetails }) => async (
 		.set({
 			...hostelDetails,
 			pictures: uploadedFiles,
+			hostelName,
 			authorId: getState().firebase.auth.uid,
 			dateAdded: new Date(),
-			manager: getState().firebase.auth.displayName,
+			manager: getState().firebase.auth.email,
 		})
 		.then(() => {
 			dispatch({ type: ADD_HOSTEL });
@@ -51,32 +50,6 @@ export const addHostel = ({ pictures, hostelName, ...hostelDetails }) => async (
 		.catch((err) => {
 			dispatch({ type: ADD_HOSTEL_ERROR, payload: err.message });
 		});
-
-	// const storageRef = getFirebase().storage().ref();
-	// const auth = getFirebase().auth.uid;
-
-	// pictures.forEach((file, index) => {
-	// const fileRef = storageRef.child(
-	// 	`images/${auth}.${file.name.split('.')[0]}`
-	// 	);
-	// 	fileRef.put(pictures[index]).then((snapshot) => console.log(snapshot));
-	// });
-	// await fileRef.put(hostelDetails.pictures[0]);
-	// const URL = await fileRef.getDownloadURL();
-	// console.log(URL);
-	//  getFirebase()
-	// 	.storage()
-	// 	.ref()
-	// 	.child(`test.jpg`)
-	// 	.put(hostelDetails.pictures[0])
-
-	// .on(getFirebase().storage.TaskEvent.STATE_CHANGED, (snapshot) => {
-	// 	console.log(snapshot.downloadURL);
-	// });
-
-	// .then((snapshot) => {
-	// 	console.log(snapshot);
-	// });
 };
 
 export const getManagerHostels = () => (

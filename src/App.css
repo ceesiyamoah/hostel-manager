@@ -44,7 +44,8 @@
 	display: flex;
 	justify-content: center;
 }
-.buttons-container button {
+.buttons-container button,
+.hostel > button {
 	border-radius: var(--borderRadius);
 	cursor: pointer;
 	font-weight: 600;
@@ -55,10 +56,12 @@
 	border: none;
 }
 
-.buttons-container .resetpassword {
+.buttons-container .resetpassword,
+.hostel > button {
 	background-color: white;
 }
-.buttons-container .resetpassword:hover {
+.buttons-container .resetpassword:hover,
+.hostel > button:hover {
 	color: var(--primaryColor);
 }
 
@@ -366,4 +369,40 @@
 .ammenties p {
 	display: inline-block;
 	width: 40%;
+}
+
+.hostelList {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.hostel {
+	background-color: rgb(230, 228, 228);
+	width: 20vw;
+	margin: 1vw;
+	min-height: 40vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	border-radius: 1vh;
+	transition: all;
+	transition-delay: 50ms;
+	transition-timing-function: ease-in;
+}
+.hostel:hover {
+	transform: scale(1.1);
+}
+.hostelList > .hostel > button {
+	padding: 0.5vw;
+}
+
+.hostel > img {
+	height: 70%;
+	width: 100%;
+	border-top-left-radius: 1vh;
+	border-top-right-radius: 1vh;
+	object-fit: cover;
 }

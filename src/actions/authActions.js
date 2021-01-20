@@ -45,7 +45,6 @@ export const signup = ({ email, password, name }) => (
 	getState,
 	{ getFirebase }
 ) => {
-	console.log(getFirebase());
 	return getFirebase()
 		.auth()
 		.createUserWithEmailAndPassword(email, password)
