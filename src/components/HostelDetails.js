@@ -1,21 +1,48 @@
 import React from 'react';
 import { connect } from 'react-redux';
-const HostelDetails = ({
-	match: {
-		params: { id, manager },
-	},
-	hostel,
-	...rest
-}) => {
-	console.log(id, manager);
-	return <div className='dashboard-container'>fkdls</div>;
+import { compose } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import Carousel from './Carousel';
+const HostelDetails = ({ match, hostel, ...rest }) => {
+	if (hostel) {
+		return (
+			<div className='dashboard-container'>
+				<div className='hosteldetailsheader'>
+					<h1>{hostel.hostelName}</h1>
+					<div className='detailsbuttons'>
+						<button>Edit</button>
+						<button>Delete</button>
+					</div>
+				</div>
+				<hr />
+				<div className='hosteldetailcontainer'>
+					<Carousel images={hostel.pictures} />
+				</div>
+			</div>
+		);
+	}
+	return null;
 };
 
 const mapStateToProps = (state, ownProps) => {
-	console.log(state.firestore);
-	return {
-		hostel: state,
-	};
+	if (state.firestore.ordered.hostels) {
+		const hostel = state.firestore.ordered.hostels.filter(
+			({ id }) => id === ownProps.match.params.id
+		);
+
+		return {
+			hostel: hostel[0],
+		};
+	}
+	return {};
 };
 
-export default connect(mapStateToProps, null)(HostelDetails);
+export default compose(
+	connect(mapStateToProps),
+	firestoreConnect((ownProps) => [
+		{
+			collection: 'hostels',
+			where: ['authorId', '==', ownProps.match.params.manager],
+		},
+	])
+)(HostelDetails);
