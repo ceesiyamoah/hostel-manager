@@ -1,3 +1,4 @@
+import { getFirebase } from 'react-redux-firebase';
 import history from '../history';
 import { ADD_HOSTEL, ADD_HOSTEL_ERROR } from '../types';
 
@@ -42,6 +43,7 @@ export const addHostel = ({ pictures, hostelName, ...hostelDetails }) => async (
 			authorId: getState().firebase.auth.uid,
 			dateAdded: new Date(),
 			manager: getState().firebase.auth.email,
+			rooms: [],
 		})
 		.then(() => {
 			dispatch({ type: ADD_HOSTEL });
@@ -50,6 +52,23 @@ export const addHostel = ({ pictures, hostelName, ...hostelDetails }) => async (
 		.catch((err) => {
 			dispatch({ type: ADD_HOSTEL_ERROR, payload: err.message });
 		});
+};
+export const addRoomToHostel = ({ id, manager }, roomDetails) => (
+	dispatch,
+	getState,
+	{ getFirebase }
+) => {
+	getFirebase()
+		.firestore()
+		.collection('hostels')
+		.doc(id)
+		.update({
+			rooms: getFirebase().firestore.FieldValue.arrayUnion(roomDetails),
+		})
+		.then(() => {
+			history.push(`/managerhostels/${manager}/${id}`);
+		})
+		.catch((err) => console.log(err));
 };
 
 export const getManagerHostels = () => (

@@ -3,13 +3,26 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import Carousel from './Carousel';
-const HostelDetails = ({ match, hostel, ...rest }) => {
+import history from '../history';
+const HostelDetails = ({
+	match: {
+		params: { manager, id },
+	},
+	hostel,
+}) => {
 	if (hostel) {
 		return (
 			<div className='dashboard-container'>
 				<div className='hosteldetailsheader'>
-					<h1>{hostel.hostelName}</h1>
+					<h1>{hostel.hostelName} hostel</h1>
 					<div className='detailsbuttons'>
+						<button
+							onClick={() => {
+								history.push(`/managerhostels/addRoom/${manager}/${id}`);
+							}}
+						>
+							Add room
+						</button>
 						<button>Edit</button>
 						<button>Delete</button>
 					</div>
@@ -17,6 +30,16 @@ const HostelDetails = ({ match, hostel, ...rest }) => {
 				<hr />
 				<div className='hosteldetailcontainer'>
 					<Carousel images={hostel.pictures} />
+					<hr />
+					<div className='hosteltext'>
+						<span>
+							<b>Description</b>:{hostel.description}
+						</span>
+						<hr />
+						<>
+							<h3>Ammenities</h3>
+						</>
+					</div>
 				</div>
 			</div>
 		);

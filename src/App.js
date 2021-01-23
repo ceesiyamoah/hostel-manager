@@ -12,6 +12,7 @@ import VerifyEmail from './pages/VerifyEmail';
 import ResetPassword from './components/ResetPassword';
 import AddHostel from './components/AddHostel';
 import HostelDetails from './components/HostelDetails';
+import AddRoom from './components/AddRoom';
 const App = () => {
 	return (
 		<>
@@ -45,6 +46,12 @@ const App = () => {
 						restricted
 						exact
 						path='/managerhostels/:manager/:id'
+					/>
+					<PrivateRoute
+						component={AddRoom}
+						restricted
+						exact
+						path='/managerhostels/addRoom/:manager/:id'
 					/>
 				</Switch>
 			</Router>

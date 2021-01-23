@@ -19,15 +19,19 @@ const Carousel = ({ images }) => {
 	};
 	return (
 		<div className='carousel-container'>
-			<div className='leftarrow' onClick={() => handleClick(-1)}>
-				<span className='top'></span>
-				<span className='bottom'></span>
-			</div>
+			{images.length > 1 && (
+				<div className='leftarrow' onClick={() => handleClick(-1)}>
+					<span className='top'></span>
+					<span className='bottom'></span>
+				</div>
+			)}
 			<img src={images[selected]} alt='hostel' className='carousel-main' />
-			<div className='rightarrow' onClick={() => handleClick(1)}>
-				<span className='top'></span>
-				<span className='bottom'></span>
-			</div>
+			{images.length > 1 && (
+				<div className='rightarrow' onClick={() => handleClick(1)}>
+					<span className='top'></span>
+					<span className='bottom'></span>
+				</div>
+			)}
 		</div>
 	);
 };

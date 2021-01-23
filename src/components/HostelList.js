@@ -14,13 +14,14 @@ const HostelList = ({ hostels, uid }) => {
 	}
 	return (
 		<div className='hostelList'>
-			{hostels.map(({ id, pictures, location, hostelName, ...rest }) => {
+			{hostels.map(({ id, pictures, location, rooms, hostelName, ...rest }) => {
 				console.log(rest);
 				return (
 					<div className='hostel' key={id}>
 						<img src={pictures[0]} alt={hostelName} />
 						<h3>Name: {hostelName}</h3>
 						<span>Location:{location}</span>
+						<span>Types of rooms:{rooms.length}</span>
 
 						<button onClick={() => history.push(`managerhostels/${uid}/${id}`)}>
 							View

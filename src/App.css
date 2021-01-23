@@ -202,18 +202,22 @@
 }
 
 .dashboard-container.hostelform button,
-.detailsbuttons button:first-child {
+.detailsbuttons button {
 	border-radius: var(--borderRadius);
 	color: white;
 	cursor: pointer;
 	font-weight: 600;
 	outline: none;
 	background-color: var(--primaryColor);
-	margin: 5px 0;
+
 	padding: 10px 20px;
 	border: none;
-	width: 10%;
+	width: 15%;
 	align-self: center;
+}
+
+.detailsbuttons button:nth-child(1) {
+	background-color: green;
 }
 
 .dashboard-container.resetpassword > .content > input {
@@ -409,14 +413,15 @@
 }
 .hosteldetailsheader {
 	display: flex;
+	justify-content: space-between;
 }
 
 .detailsbuttons {
 	display: flex;
 	justify-content: flex-end;
-	width: 100%;
+	width: 50%;
 }
-.detailsbuttons button:first-child {
+.detailsbuttons button {
 	margin: 10px;
 }
 .detailsbuttons button:last-child {
@@ -426,10 +431,10 @@
 	font-weight: 600;
 	outline: none;
 	background-color: red;
-	margin: 5px 0;
+
 	padding: 10px 20px;
 	border: none;
-	width: 10%;
+	width: 15%;
 	align-self: center;
 }
 

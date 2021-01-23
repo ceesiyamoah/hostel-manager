@@ -8,6 +8,25 @@ export const ammenties = [
 	{ name: 'Recreational Space', id: 'recreationalSpace' },
 	{ name: 'TV Room', id: 'tvRoom' },
 ];
+export const roomFacilities = [
+	'Wash Room',
+	'Kitchen',
+	'Balcony',
+	'Personal Electricity Meter',
+	'Air Conditioner',
+	'Refridgerator',
+];
+
+export const roomInitialState = {
+	bedspace: 0,
+	washroom: false,
+	priceperbed: parseFloat(0).toFixed(2),
+	kitchen: false,
+	balcony: true,
+	personalelectricitymeter: false,
+	airconditioner: false,
+	refridgerator: false,
+};
 
 export const hostelInitialState = {
 	hostelName: '',
