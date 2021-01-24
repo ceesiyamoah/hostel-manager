@@ -13,6 +13,7 @@ import ResetPassword from './components/ResetPassword';
 import AddHostel from './components/AddHostel';
 import HostelDetails from './components/HostelDetails';
 import AddRoom from './components/AddRoom';
+import RoomDetails from './components/RoomDetails';
 const App = () => {
 	return (
 		<>
@@ -52,6 +53,12 @@ const App = () => {
 						restricted
 						exact
 						path='/managerhostels/addRoom/:manager/:id'
+					/>
+					<PrivateRoute
+						component={RoomDetails}
+						restricted
+						exact
+						path='/managerhostels/:manager/:id/:roomNumber'
 					/>
 				</Switch>
 			</Router>

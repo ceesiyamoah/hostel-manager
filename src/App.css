@@ -491,3 +491,39 @@ button:active {
 .rightarrow:hover * {
 	background-color: var(--primaryColor);
 }
+
+.room {
+	display: flex;
+	flex-direction: column;
+	width: 200px;
+	height: auto;
+	border-radius: 5px;
+	background-color: grey;
+	margin: 10px;
+}
+.room > img {
+	width: 100%;
+	height: 70%;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+.room > .textholder {
+	padding: 0 5px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+}
+.textholder button {
+	display: flex;
+	align-self: center;
+}
+
+.rooms:hover {
+	cursor: pointer;
+}
+
+.rooms {
+	display: flex;
+	flex-flow: row wrap;
+}

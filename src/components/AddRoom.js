@@ -6,25 +6,38 @@ import { connect } from 'react-redux';
 import { addRoomToHostel } from './../actions/managerHostelsActions';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
-const AddRoom = ({ match: { params }, addRoomToHostel }) => {
+import Input from './../Input';
+const AddRoom = ({ match: { params }, roomCount, addRoomToHostel }) => {
 	const [roomDetails, setFacilities] = React.useState(roomInitialState);
 	const handleChange = (e) => {
-		const { value, id, type } = e.target;
-		console.log(value, id, type);
-		if (type === 'radio') {
-			const editedID = id.split('_')[0];
-			setFacilities({
-				...roomDetails,
-				[editedID]: value === 'true',
-			});
-		}
-		if (type === 'number') {
-			setFacilities({ ...roomDetails, [id]: value });
+		const { value, id, type, files } = e.target;
+
+		switch (type) {
+			case 'radio':
+				const editedID = id.split('_')[0];
+				setFacilities({
+					...roomDetails,
+					[editedID]: value === 'true',
+				});
+
+				break;
+			case 'number':
+				setFacilities({ ...roomDetails, [id]: value });
+				break;
+			case 'file':
+				setFacilities({
+					...roomDetails,
+					pictures: Array.from(Array(files.length).keys()).map((i) => files[i]),
+				});
+				break;
+
+			default:
+				break;
 		}
 	};
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		addRoomToHostel(params, roomDetails);
+		addRoomToHostel(params, roomDetails, roomCount);
 	};
 	return (
 		<div className='dashboard-container'>
@@ -45,12 +58,20 @@ const AddRoom = ({ match: { params }, addRoomToHostel }) => {
 						type='number'
 						min='0'
 						id='priceperbed'
-						placeholder='Price'
-						value={roomDetails.price}
+						value={roomDetails.priceperbed}
 						onChange={handleChange}
 						required
 					/>
 				</div>
+				<Input
+					name='pictures'
+					id='pictures'
+					type='file'
+					multiple
+					accept='image/*'
+					required
+					onChange={handleChange}
+				/>
 				<>
 					{roomFacilities.map((item) => {
 						const editedName = item.split(' ').join('').toLowerCase();
@@ -73,12 +94,11 @@ const AddRoom = ({ match: { params }, addRoomToHostel }) => {
 };
 
 const mapStateToProps = (state) => {
-	console.log(state.firestore.ordered.hostels?.[0]);
-	// if (state.firestore.ordered.hostels[0]?.rooms) {
-	// 	const roomCount = state.firestore.ordered.hostels[0];
-	// 	console.log(roomCount);
-	// }
-
+	if (state.firestore.ordered.hostels?.[0]) {
+		return {
+			roomCount: state.firestore.ordered.hostels[0].rooms.length,
+		};
+	}
 	return {};
 };
 

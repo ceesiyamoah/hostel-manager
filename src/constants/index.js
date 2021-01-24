@@ -18,8 +18,9 @@ export const roomFacilities = [
 ];
 
 export const roomInitialState = {
-	bedspace: 0,
+	bedspace: parseFloat(0).toFixed(0),
 	washroom: false,
+	pictures: null,
 	priceperbed: parseFloat(0).toFixed(2),
 	kitchen: false,
 	balcony: true,

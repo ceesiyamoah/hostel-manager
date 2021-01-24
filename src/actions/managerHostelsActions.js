@@ -1,6 +1,7 @@
 import { getFirebase } from 'react-redux-firebase';
 import history from '../history';
-import { ADD_HOSTEL, ADD_HOSTEL_ERROR } from '../types';
+import { ADD_HOSTEL, ADD_HOSTEL_ERROR, ROOM_ADDED } from '../types';
+import { GET_MANAGER_HOSTELS } from './../types/index';
 
 export const addHostel = ({ pictures, hostelName, ...hostelDetails }) => async (
 	dispatch,
@@ -13,7 +14,7 @@ export const addHostel = ({ pictures, hostelName, ...hostelDetails }) => async (
 				.storage()
 				.ref()
 				.child(
-					`images/${getState().firebase.auth.uid}/${hostelName}/${
+					`images/hostels/${getState().firebase.auth.uid}/${hostelName}/${
 						hostelName + index
 					}.${file.name.split('.')[1]}`
 				)
@@ -53,20 +54,50 @@ export const addHostel = ({ pictures, hostelName, ...hostelDetails }) => async (
 			dispatch({ type: ADD_HOSTEL_ERROR, payload: err.message });
 		});
 };
-export const addRoomToHostel = ({ id, manager }, roomDetails) => (
-	dispatch,
-	getState,
-	{ getFirebase }
-) => {
+export const addRoomToHostel = (
+	{ id, manager },
+	{ pictures, ...roomDetails },
+	roomCount
+) => async (dispatch, getState, { getFirebase }) => {
+	const uploadedFiles = await Promise.all(
+		pictures.map(async (file, index) => {
+			const uploadTask = getFirebase()
+				.storage()
+				.ref()
+				.child(
+					`images/rooms/${getState().firebase.auth.uid}/${
+						id + file.name.split('.')[0] + index + roomCount
+					}.${file.name.split('.')[1]}`
+				)
+				.put(file);
+			const url = await new Promise((resolve, reject) => {
+				uploadTask.on(
+					'state_changed',
+					() => {},
+					(error) => reject(error),
+					async () => {
+						const downloadUrl = await uploadTask.snapshot.ref.getDownloadURL();
+						resolve(downloadUrl);
+					}
+				);
+			});
+			return url;
+		})
+	);
+
 	getFirebase()
 		.firestore()
 		.collection('hostels')
 		.doc(id)
 		.update({
-			rooms: getFirebase().firestore.FieldValue.arrayUnion(roomDetails),
+			rooms: getFirebase().firestore.FieldValue.arrayUnion({
+				...roomDetails,
+				pictures: uploadedFiles,
+			}),
 		})
 		.then(() => {
 			history.push(`/managerhostels/${manager}/${id}`);
+			dispatch({ type: ROOM_ADDED });
 		})
 		.catch((err) => console.log(err));
 };
@@ -83,5 +114,6 @@ export const getManagerHostels = () => (
 		.then((querySnaphot) => {
 			const data = querySnaphot.docs.map((doc) => doc.data);
 			console.log(data);
+			dispatch({ type: GET_MANAGER_HOSTELS });
 		});
 };

@@ -10,6 +10,7 @@ const HostelDetails = ({
 	},
 	hostel,
 }) => {
+	console.log(hostel);
 	if (hostel) {
 		return (
 			<div className='dashboard-container'>
@@ -38,6 +39,43 @@ const HostelDetails = ({
 						<hr />
 						<>
 							<h3>Ammenities</h3>
+							<ul>
+								{hostel.generator && <li>Generator</li>}
+								{hostel.library && <li>Library</li>}
+								{hostel.studyRoom && <li>Study Room</li>}
+								{hostel.wifi && <li>Wi-fi</li>}
+								{hostel.security && <li>Security</li>}
+								{hostel.parkingSpace && <li>Parking Space</li>}
+								{hostel.recreationalSpace && <li>Recreational Space</li>}
+								{hostel.tvRoom && <li>TV Room</li>}
+							</ul>
+						</>
+						<>
+							{hostel.rooms && (
+								<div className='rooms'>
+									{hostel.rooms.map((room, index) => (
+										<div className='room'>
+											<img src={room.pictures[0]} alt='room' />
+											<div className='textholder'>
+												<span>{room.bedspace} in a room</span>
+												<span>
+													Price: Gh¢
+													{Number(room.priceperbed).toFixed(2)}
+												</span>
+												<button
+													onClick={() => {
+														history.push(
+															`/managerhostels/${manager}/${id}/${index}`
+														);
+													}}
+												>
+													View
+												</button>
+											</div>
+										</div>
+									))}
+								</div>
+							)}
 						</>
 					</div>
 				</div>
@@ -52,6 +90,8 @@ const mapStateToProps = (state, ownProps) => {
 		const hostel = state.firestore.ordered.hostels.filter(
 			({ id }) => id === ownProps.match.params.id
 		);
+		const roomCount = hostel[0].rooms.length;
+		console.log(roomCount);
 
 		return {
 			hostel: hostel[0],
