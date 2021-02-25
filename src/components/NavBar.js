@@ -22,6 +22,7 @@ const NavBar = ({ uid, signout, isVerified }) => {
 							className='menu-bars'
 						/>
 						<Link to='/dashboard'>Hostels</Link>
+						<Link to='/allHostels'>All hostels</Link>
 						<button className='signout' onClick={signout}>
 							Sign out
 						</button>

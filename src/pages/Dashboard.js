@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import history from '../history';
-import HostelList from '../components/HostelList';
+import HostelList from '../components/ManagerHostelList';
 
 const Dashboard = ({ isVerified }) => {
 	useEffect(() => {

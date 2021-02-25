@@ -14,6 +14,8 @@ import AddHostel from './components/AddHostel';
 import HostelDetails from './components/HostelDetails';
 import AddRoom from './components/AddRoom';
 import RoomDetails from './components/RoomDetails';
+import HostelEdit from './components/HostelEdit';
+import HostelsList from './components/HostelsList';
 const App = () => {
 	return (
 		<>
@@ -28,8 +30,15 @@ const App = () => {
 						component={AddHostel}
 						restricted
 						exact
-						path='/addhostel'
+						path='/managershostel/addhostel'
 					/>
+					<PrivateRoute
+						component={HostelEdit}
+						restricted
+						exact
+						path='/managershostel/edithostel/:manager/:id'
+					/>
+
 					<PrivateRoute
 						component={Dashboard}
 						restricted
@@ -59,6 +68,12 @@ const App = () => {
 						restricted
 						exact
 						path='/managerhostels/:manager/:id/:roomNumber'
+					/>
+					<PrivateRoute
+						component={HostelsList}
+						restricted
+						exact
+						path='/allHostels'
 					/>
 				</Switch>
 			</Router>

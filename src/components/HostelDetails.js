@@ -24,7 +24,13 @@ const HostelDetails = ({
 						>
 							Add room
 						</button>
-						<button>Edit</button>
+						<button
+							onClick={() => {
+								history.push(`/managershostel/edithostel/${manager}/${id}`);
+							}}
+						>
+							Edit
+						</button>
 						<button>Delete</button>
 					</div>
 				</div>
@@ -54,7 +60,7 @@ const HostelDetails = ({
 							{hostel.rooms && (
 								<div className='rooms'>
 									{hostel.rooms.map((room, index) => (
-										<div className='room'>
+										<div className='room' key={index}>
 											<img src={room.pictures[0]} alt='room' />
 											<div className='textholder'>
 												<span>{room.bedspace} in a room</span>

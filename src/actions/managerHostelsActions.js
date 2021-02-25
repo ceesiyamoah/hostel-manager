@@ -1,4 +1,3 @@
-import { getFirebase } from 'react-redux-firebase';
 import history from '../history';
 import { ADD_HOSTEL, ADD_HOSTEL_ERROR, ROOM_ADDED } from '../types';
 import { GET_MANAGER_HOSTELS } from './../types/index';
@@ -100,6 +99,14 @@ export const addRoomToHostel = (
 			dispatch({ type: ROOM_ADDED });
 		})
 		.catch((err) => console.log(err));
+};
+
+export const editHostel = ({ id, manager }, hostelDetails) => (
+	dispatch,
+	getState,
+	{ getFirebase }
+) => {
+	console.log(hostelDetails);
 };
 
 export const getManagerHostels = () => (
